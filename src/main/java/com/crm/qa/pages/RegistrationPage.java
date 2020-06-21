@@ -1,7 +1,6 @@
 package com.crm.qa.pages;
 
 import com.crm.qa.base.TestBase;
-import com.crm.qa.util.TestUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -11,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
-public class LoginPage extends TestBase {
+public class RegistrationPage extends TestBase {
     @FindBy(xpath="//span[contains(text(),'Register')]//parent::button")
     public WebElement registerBtn;
 
@@ -57,7 +56,7 @@ public class LoginPage extends TestBase {
     @FindBy(xpath = "//input[@name='password']//following-sibling::p")
     public WebElement passwordError;
 
-    @FindBy(xpath = "//div[@class='info-detail ng-scope']")
+    @FindBy(xpath = "//div[@class='info-detail']/p")
     public WebElement emailinfoTooltip;
 
     @FindBy(xpath = "//span[contains(text(),'Login')]//parent::button")
@@ -75,7 +74,13 @@ public class LoginPage extends TestBase {
     @FindBy(xpath = "(//input[contains(@class,'finish-profile-input')])[2]")
     public WebElement registrationOrg;
 
+    /*
     @FindBy(xpath = "//input[@id='input-0']")
+    public WebElement registrationCountry;
+
+     */
+
+    @FindBy(xpath = " //input[@id='country']")
     public WebElement registrationCountry;
 
     @FindBy(xpath = "//span[contains(text(),'Continue')]//parent::button")
@@ -140,47 +145,56 @@ public class LoginPage extends TestBase {
     @FindBy(xpath = "//div[@class='user-add-action']")
     public WebElement addAction;
 
-    @FindBy(xpath = "//button[@class='active-proceed']")
+    @FindBy(xpath = "//button[contains(@class,'active-proceed')]")
     public WebElement proceedToActivity;
-
-    @FindBy(xpath = "//a[text()='website']")
-    public WebElement getThingsDone;
-
-    @FindBy(xpath = "//a[text()='Register']")
-    public WebElement registerLink;
 
     @FindBy(xpath = "//a[@class='forgot-password-login']")
     public WebElement forgotpwdLink;
 
-    @FindBy(xpath = "//div[@class='fp-header-area']//div[@class='fp-main-heading']")
-    public WebElement forgotPwdPage;
+    @FindBy(xpath = "//span[contains(text(),'Submit')]//parent::button")
+    public WebElement submitbtn;
+
+    @FindBy(xpath = "//input[@name='retypePassword']")
+    public WebElement retypePwd;
+
+    @FindBy(xpath = "//button//span[text()='Resend link']")
+    public WebElement Resendbtn;
+
+    //div[@class='fp-main-heading']
+    @FindBy(xpath = "//div[@class='fp-main-heading']")
+    public WebElement passwordSuccessfully;
+
+    @FindBy(xpath = "//div[@class='ytp-title-beacon']/following-sibling::a")
+    public WebElement prodDemo;
+
+    @FindBy(xpath = "//div/p[@class='download-register']")
+    public WebElement visitListOfFeatures;
+
+    @FindBy(xpath = "//button[contains(@class,'ytp-large-play-button')]")
+    public WebElement thumbnail;
+
+    @FindBy(xpath = "//a[text()='website']")
+    public WebElement getThingsDone;
+
+    @FindBy(xpath = "//a/span[text()='Terms of Service']")
+    public WebElement termsOfService;
+
+    @FindBy(xpath = "//a/span[text()='Privacy Policy']")
+    public WebElement privacyPolicy;
+
+    @FindBy(xpath = "//div[@class='workspace-name']/input")
+    public WebElement projectName;
+
+    @FindBy(xpath = "//div[@class='upload-image']/input")
+    public WebElement projectLogo;
+
+    @FindBy(xpath = "//div[@class='img-profile']/following-sibling::input")
+    public WebElement profileImage;
 
 
-    public LoginPage() {
+    public RegistrationPage() {
         PageFactory.initElements(driver, this);
     }
-
-    public ForgotPasswordPage clickOnForgotpwd()
-    {
-        forgotpwdLink.isEnabled();
-        forgotpwdLink.click();
-        return PageFactory.initElements(driver, ForgotPasswordPage.class);
-    }
-
-    public ActivitiesPage loginInToGTD(String emailid,String password)
-    {
-        login.isEnabled();
-        login.click();
-        TestUtil.waitforelement(loginbtn);
-        emailField.isEnabled();
-        emailField.sendKeys(emailid);
-        passwordField.isEnabled();
-        passwordField.sendKeys(password);
-        loginbtn.isEnabled();
-        loginbtn.click();
-        return PageFactory.initElements(driver, ActivitiesPage.class);
-    }
-
 
     public String verifyRegistrationPageTitle(){
         return driver.getTitle();
@@ -191,6 +205,14 @@ public class LoginPage extends TestBase {
         String message = element.getText();
         return message;
     }
+
+    public LoginPage clickOnLogin()
+    {
+        login.isEnabled();
+        login.click();
+        return PageFactory.initElements(driver, LoginPage.class);
+    }
+
 
     public boolean isElementVisible(WebElement element)
     {

@@ -1,17 +1,13 @@
 package com.crm.qa.pages;
 
 import com.crm.qa.base.TestBase;
-import com.crm.qa.util.TestUtil;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.List;
-
-public class LoginPage extends TestBase {
+public class ForgotPasswordPage  extends TestBase {
     @FindBy(xpath="//span[contains(text(),'Register')]//parent::button")
     public WebElement registerBtn;
 
@@ -155,8 +151,10 @@ public class LoginPage extends TestBase {
     @FindBy(xpath = "//div[@class='fp-header-area']//div[@class='fp-main-heading']")
     public WebElement forgotPwdPage;
 
+    @FindBy(xpath = "//span[contains(text(),'Submit')]//parent::button")
+    public WebElement submitbtn;
 
-    public LoginPage() {
+    public ForgotPasswordPage() {
         PageFactory.initElements(driver, this);
     }
 
@@ -165,20 +163,6 @@ public class LoginPage extends TestBase {
         forgotpwdLink.isEnabled();
         forgotpwdLink.click();
         return PageFactory.initElements(driver, ForgotPasswordPage.class);
-    }
-
-    public ActivitiesPage loginInToGTD(String emailid,String password)
-    {
-        login.isEnabled();
-        login.click();
-        TestUtil.waitforelement(loginbtn);
-        emailField.isEnabled();
-        emailField.sendKeys(emailid);
-        passwordField.isEnabled();
-        passwordField.sendKeys(password);
-        loginbtn.isEnabled();
-        loginbtn.click();
-        return PageFactory.initElements(driver, ActivitiesPage.class);
     }
 
 
@@ -207,5 +191,6 @@ public class LoginPage extends TestBase {
         }
         return flag;
     }
+
 
 }
